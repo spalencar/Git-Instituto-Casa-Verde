@@ -1589,7 +1589,7 @@
         // ... seu código existente ...
 
         // Carregar dados do JSON externo
-        fetch("URL_DO_SEU_JSON/eventos.json")
+        fetch("https://raw.githubusercontent.com/spalencar/update-eventos/refs/heads/main/eventos.json")
           .then((response) => response.json())
           .then((data) => {
             renderizarProximosEventos(data.proximosEventos);
