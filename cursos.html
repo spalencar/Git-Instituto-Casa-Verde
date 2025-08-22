@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="imagens/favicon-16x16.png" />
+    <title>Cursos - Instituto Casa Verde</title>
+    <!-- Link para o seu arquivo style.css (se existir e contiver estilos globais) -->
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      /* --- CSS EMBUTIDO PARA CURSOS.HTML (ADAPTADO DO EVENTOS.HTML) --- */
+
+      /* Importação de fontes (ex: Google Fonts) */
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap");
+
+      /* Variáveis CSS para cores e tamanhos */
+      :root {
+        --primary-color: #2c3e50; /* Azul escuro */
+        --secondary-color: #e67e22; /* Laranja */
+        --accent-color: #3498db; /* Azul claro */
+        --light-bg: #f4f7f6; /* Fundo claro */
+        --dark-bg: #222; /* Fundo escuro para destaque */
+        --text-color: #333;
+        --light-text-color: #f9f9f9;
+        --border-radius: 8px;
+        --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Reset Básico */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: #ecafaf; /* Cor de fundo do Eventos.html */
+        scroll-behavior: smooth;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Links Globais */
+      a {
+        text-decoration: none;
+        color: var(--accent-color);
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: var(--secondary-color);
+      }
+
+      /* Botões */
+      .btn-primary,
+      .btn-secondary,
+      .btn-quiz,
+      .btn-collab {
+        display: inline-block;
+        padding: 12px 25px;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease, color 0.3s ease,
+          transform 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: var(--secondary-color);
+        color: var(--light-text-color);
+      }
+
+      .btn-secondary:hover {
+        background-color: #e06200; /* Um pouco mais escuro */
+        transform: translateY(-2px);
+      }
+
+      .btn-quiz {
+        /* Cor para o botão do quiz */
+        background-color: #8a2be2; /* Um tom de roxo */
+        color: var(--light-text-color);
+      }
+      .btn-quiz:hover {
+        background-color: #6a1b9a;
+        transform: translateY(-2px);
+      }
+
+      .btn-collab {
+        /* Cor para o botão colaborativo */
+        background-color: #ff8c00; /* Um tom de laranja mais vibrante */
+        color: var(--light-text-color);
+      }
+      .btn-collab:hover {
+        background-color: #e67e00;
+        transform: translateY(-2px);
+      }
+
+      /* SEÇÕES GERAIS */
+      .section-padded {
+        padding: 80px 0;
+      }
+
+      .background-highlight {
+        background-color: var(--light-bg);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+      }
+
+      .section-header .section-logo {
+        width: 60px; /* Tamanho do logotipo por seção */
+        height: auto;
+        margin-bottom: -25px;
+        margin-right: 10px;
+        opacity: 0.8;
+      }
+
+      .section-header h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 2.8em;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: var(--secondary-color);
+        margin: 10px auto 0;
+        border-radius: 2px;
+      }
+
+      /* HEADER da Página (fixo, sem logo gigante ou carrossel) */
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* Alinha o logo e o menu ao centro verticalmente */
+        width: 100%;
+        position: fixed; /* Menu fixo */
+        top: 0;
+        left: 0;
+        padding: 15px 20px;
+        background-color: rgba(
+          44,
+          62,
+          80,
+          0.95
+        ); /* Cor primária com transparência */
+        box-shadow: var(--box-shadow);
+        z-index: 1000;
+      }
+
+      .page-header .logo img {
+        height: 40px; /* Tamanho padrão para o logo em páginas secundárias */
+        margin-top: 0; /* Remove a margem negativa que o destacava na Home */
+        filter: drop-shadow(0 0 30px rgba(252, 252, 247, 0.2));
+      }
+
+      .main-nav ul {
+        list-style: none;
+        display: flex;
+      }
+
+      .main-nav ul li {
+        margin-left: 30px;
+      }
+
+      .main-nav ul li a {
+        color: var(--light-text-color);
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+        padding: 5px 0;
+        position: relative;
+      }
+
+      .main-nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        background-color: var(--secondary-color);
+        left: 0;
+        bottom: -5px;
+        transition: width 0.3s ease;
+      }
+
+      .main-nav ul li a:hover::after {
+        width: 100%;
+      }
+
+      /* Menu Hamburger */
+      .hamburger-menu {
+        display: none; /* Esconde em desktop */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .hamburger-menu .bar {
+        width: 100%;
+        height: 3px;
+        background-color: var(--light-text-color);
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+
+      /* Hero Section para Cursos */
+      .courses-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("imagens/voluntariado.png") no-repeat center center/cover;
+        height: 50vh;
+        display: flex; /* Altera para flexbox horizontal */
+        flex-direction: row; /* Alinha os itens em linha (logo e conteúdo) */
+        align-items: center; /* Centraliza verticalmente os itens na linha */
+        justify-content: center; /* Centraliza horizontalmente o container flex */
+        color: var(--light-text-color);
+        position: relative;
+        padding-top: 80px; /* Espaço para o header fixo */
+        padding-left: 20px; /* Adiciona padding lateral para o logo não colar na borda */
+        padding-right: 20px; /* Adiciona padding lateral */
+        /* text-align: left; Removido, será aplicado no .hero-content */
+      }
+
+      .courses-hero img {
+        width: 8%; /* Tamanho do logo */
+        margin-right: 30px; /* Espaço entre o logo e o texto */
+        margin-bottom: 0; /* Remove a margem inferior anterior */
+        z-index: 1;
+        filter: drop-shadow(0 0 30px rgba(252, 252, 247, 0.2));
+        flex-shrink: 0; /* Impede que o logo encolha em telas menores */
+      }
+
+      /* Novo estilo para o conteúdo de texto do hero */
+      .hero-content {
+        text-align: center; /* Centraliza o texto dentro desta div */
+        flex-grow: 1; /* Permite que esta div ocupe o espaço restante */
+        max-width: 800px; /* Limita a largura para melhor leitura */
+      }
+
+      .courses-hero h1 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 3.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        margin-bottom: 15px;
+      }
+
+      .courses-hero p {
+        font-size: 1.2em;
+        max-width: 800px; /* Mantém a largura máxima para o parágrafo */
+        margin: 0 auto; /* Centraliza o parágrafo dentro do .hero-content */
+        z-index: 1;
+      }
+
+      /* Cards de Curso (usando estilo similar ao event-card) */
+      .course-card {
+        background-color: #fff;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 40px; /* Espaçamento entre os cards de curso */
+        border-left: 5px solid var(--accent-color); /* Borda lateral para destaque */
+      }
+      .course-card.eja {
+        border-left-color: #4caf50; /* Verde para EJA */
+      }
+      .course-card.mastergeeks {
+        border-left-color: #3f51b5; /* Azul para MasterGeeks */
+      }
+      .course-card.quiz {
+        border-left-color: #8a2be2; /* Roxo para Quiz */
+      }
+      .course-card.collab {
+        border-left-color: #ff8c00; /* Laranja para Colaborativo */
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+      }
+
+      .course-card-content {
+        padding: 25px;
+      }
+
+      .course-card-content h3 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 2.2em;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+      .course-card-content h4 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.6em;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      .course-card-content p {
+        font-size: 1.1em;
+        color: var(--text-color);
+        margin-bottom: 15px;
+      }
+      .course-card-content ul {
+        list-style: disc;
+        margin-left: 20px;
+        margin-bottom: 15px;
+        color: var(--text-color);
+      }
+      .course-card-content ul li {
+        margin-bottom: 5px;
+      }
+
+      .course-media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+
+      .course-media-item {
+        background-color: var(--light-bg);
+        padding: 15px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+
+      .course-media-item img,
+      .course-media-item video,
+      .course-media-item iframe {
+        width: 100%;
+        height: 180px; /* Altura fixa para mídias */
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      .course-media-item audio {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .story-section {
+        background-color: var(--light-bg);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        margin-top: 25px;
+      }
+      .story-section h4 {
+        color: #ad4f06;
+        margin-bottom: 15px;
+      }
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+      }
+      .story-card {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        font-style: italic;
+        color: var(--text-color);
+      }
+
+      /* Quiz Specific Styles */
+      #quiz-container {
+        background-color: #f3e5f5; /* Cor de fundo suave para o quiz */
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        border: 1px solid #d1c4e9;
+      }
+      #quiz-container p.font-semibold {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+      #quiz-container label {
+        display: block;
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: var(--text-color);
+      }
+      #quiz-container input[type="radio"] {
+        margin-right: 8px;
+        transform: scale(1.2); /* Aumenta o tamanho do radio button */
+      }
+      #quiz-results {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 700;
+      }
+      .quiz-correct {
+        color: #4caf50; /* Verde para acertos */
+      }
+      .quiz-incorrect {
+        color: #ff0000; /* Vermelho para erros */
+      }
+
+      /* Collaborative Board Specific Styles */
+      #collab-board-content {
+        background-color: #fff3e0; /* Cor de fundo suave para o mural */
+        padding: 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        border: 1px solid #ffcc80;
+      }
+      #collab-input {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ffcc80;
+        border-radius: var(--border-radius);
+        font-size: 1.1em;
+        resize: vertical;
+        min-height: 100px;
+        margin-bottom: 20px;
+        font-family: "Open Sans", sans-serif;
+        color: var(--text-color);
+      }
+      #collab-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .collab-item-card {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid #ffe0b2;
+        font-style: italic;
+        color: var(--text-color);
+      }
+      .collab-item-card span {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.85em;
+        color: #666;
+      }
+
+      /* Campanha do Agasalho Section */
+      .campaign-section {
+        background: linear-gradient(
+          to right,
+          var(--accent-color),
+          #5dade2
+        ); /* Azul claro com gradiente */
+        color: var(--light-text-color);
+        padding: 60px 20px;
+        text-align: center;
+        border-radius: var(--border-radius);
+        margin-top: 60px;
+        box-shadow: var(--box-shadow);
+      }
+      .campaign-section h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 3em;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .campaign-section p {
+        font-size: 1.2em;
+        max-width: 700px;
+        margin: 0 auto 30px auto;
+      }
+      .campaign-section .btn-campaign {
+        background-color: #fff;
+        color: var(--accent-color);
+        padding: 15px 35px;
+        border-radius: 50px; /* Botão mais arredondado */
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease, color 0.3s ease,
+          transform 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .btn-campaign:hover {
+        background-color: var(--light-bg);
+        color: var(--primary-color);
+        transform: translateY(-3px);
+      }
+
+      /* FOOTER */
+      footer {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+        text-align: center;
+        padding: 30px 0;
+        font-size: 0.9em;
+        margin-top: 60px; /* Espaço acima do footer */
+      }
+      footer .social-links a {
+        color: var(--light-text-color);
+        margin: 0 10px;
+        font-size: 1.2em;
+      }
+      footer .social-links a:hover {
+        color: var(--secondary-color);
+      }
+
+      /* RESPONSIVIDADE */
+      @media (max-width: 992px) {
+        .section-header h2 {
+          font-size: 2.2em;
+        }
+        .page-header .logo img {
+          height: 55px;
+        }
+        .courses-hero h1 {
+          font-size: 2.8em;
+        }
+        .course-card-content h3 {
+          font-size: 1.8em;
+        }
+        .course-card-content h4 {
+          font-size: 1.4em;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-nav {
+          display: none;
+        }
+        .hamburger-menu {
+          display: flex;
+        }
+        .page-header {
+          padding: 10px 15px;
+        }
+        .page-header .logo img {
+          height: 50px;
+        }
+        .courses-hero {
+          flex-direction: column; /* Volta a empilhar verticalmente em telas menores */
+          padding-top: 60px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .courses-hero img {
+          width: 15%; /* Aumenta o tamanho do logo quando empilhado */
+          margin-right: 0; /* Remove a margem direita */
+          margin-bottom: 20px; /* Adiciona margem inferior para separar do texto */
+        }
+        .hero-content {
+          text-align: center; /* Mantém o texto centralizado */
+          max-width: 90%; /* Ajusta a largura máxima para telas menores */
+        }
+        .courses-hero h1 {
+          font-size: 2.2em;
+        }
+        .courses-hero p {
+          font-size: 1em;
+        }
+        .course-media-grid {
+          grid-template-columns: 1fr;
+        }
+        .course-media-item img,
+        .course-media-item video,
+        .course-media-item iframe {
+          height: 160px;
+        }
+        .section-padded {
+          padding: 60px 0;
+        }
+        .section-header h2 {
+          font-size: 1.8em;
+        }
+        .section-header .section-logo {
+          width: 50px;
+        }
+        .story-grid,
+        #collab-items {
+          grid-template-columns: 1fr;
+        }
+        .campaign-section h2 {
+          font-size: 2.5em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .page-header .logo img {
+          height: 45px;
+        }
+        .courses-hero h1 {
+          font-size: 1.8em;
+        }
+        .courses-hero p {
+          font-size: 0.9em;
+        }
+        .course-card-content {
+          padding: 20px;
+        }
+        .course-card-content h3 {
+          font-size: 1.6em;
+        }
+        .course-card-content h4 {
+          font-size: 1.2em;
+        }
+        .course-media-item img,
+        .course-media-item video,
+        .course-media-item iframe {
+          height: 140px;
+        }
+        .campaign-section h2 {
+          font-size: 2em;
+        }
+        .campaign-section p {
+          font-size: 1em;
+        }
+      }
+
+      /* Estilos para o menu mobile (ativado via JS) */
+      .main-nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Abaixo do header, ajustar se o header mudar de altura */
+        left: 0;
+        width: 100%;
+        background-color: rgba(44, 62, 80, 0.98);
+        box-shadow: var(--box-shadow);
+        padding: 20px 0;
+        z-index: 999;
+      }
+
+      .main-nav.active ul {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+      }
+
+      .main-nav.active ul li {
+        margin: 15px 0;
+      }
+
+      .main-nav.active ul li a {
+        font-size: 1.2em;
+        padding: 10px 0;
+        display: block;
+      }
+
+      .main-nav.active ul li a::after {
+        display: none; /* Remove a linha de hover no mobile */
+      }
+
+      /* Animação do hamburger menu */
+      .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="logo">
+        <img src="imagens/logotipo-ICV.png" alt="Logotipo ICV" />
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html#inicio">Início</a></li>
+          <li><a href="index.html#sobre-nos">Sobre Nós</a></li>
+          <li><a href="index.html#atividades">Atividades</a></li>
+          <li><a href="index.html#cursos">Cursos</a></li>
+          <li><a href="index.html#doacoes">Doações</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger-menu" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </header>
+
+    <section class="courses-hero">
+      <img src="imagens/logotipo-ICV.png" alt="Logotipo ICV" />
+      <div class="hero-content">
+        <!-- Nova div para o conteúdo de texto -->
+        <h1>Vidas Transformadas!</h1>
+        <p>
+          No Instituto Casa Verde, oferecemos educação de qualidade para todas
+          as idades, abrindo portas para novas oportunidades e um futuro mais
+          brilhante.
+        </p>
+      </div>
+    </section>
+
+    <main class="section-padded">
+      <div class="container">
+        <!-- Curso: Alfabetização de Adultos - EJA São Paulo -->
+        <section id="eja-curso" class="course-card eja">
+          <div class="course-card-content">
+            <h3>Alfabetização de Adultos - EJA São Paulo</h3>
+            <p>
+              A Alfabetização de Adultos (EJA) em São Paulo abre portas para um
+              novo mundo. É a chance de aprender a ler e escrever, conquistar
+              autonomia e realizar sonhos que pareciam distantes. No Instituto
+              Casa Verde, construímos esse caminho juntos, transformando vidas e
+              fortalecendo a comunidade.
+            </p>
+
+            <div class="course-media-grid">
+              <div class="course-media-item">
+                <h4>Alunos em atividades na sala de aula</h4>
+                <img
+                  src="imagens/alfabetizacao_1.jpg"
+                  alt="Alunos em aula de alfabetização"
+                />
+                <p class="text-sm">
+                  Nossos alunos engajados em atividades práticas.
+                </p>
+              </div>
+              <div class="course-media-item">
+                <h4>Depoimento em áudio de aluno do curso</h4>
+                <img src="imagens/depoimento_1.jpg" alt="Depoimento" />
+                <audio controls class="w-full">
+                  <source
+                    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                    type="audio/mpeg"
+                  />
+                  Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <p class="text-sm">
+                  Ouça a história inspiradora de Dona Maria.
+                </p>
+              </div>
+              <div class="course-media-item">
+                <h4>Video-Aula 01 - Curso de Alfabetização</h4>
+                <iframe
+                  class="youtube-embed"
+                  src="https://www.youtube.com/embed/1EwT6Sye8EQ?si=a1I8bXgxsljCZFGq"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+                <p><b>Alfabetização de adultos - EJA SÃO PAULO</b></p>
+                <p class="text-sm">
+                  Assista todas as aulas atentamente do início ao fim. Caso
+                  tenha dúvidas, assista o vídeo novamente quantas vezes for
+                  necessário.
+                </p>
+              </div>
+            </div>
+
+            <h4>O que você vai aprender:</h4>
+            <ul>
+              <li>Leitura e escrita funcional para o dia a dia.</li>
+              <li>Noções básicas de matemática.</li>
+              <li>Interpretação de textos e documentos.</li>
+              <li>Desenvolvimento da autonomia e autoestima.</li>
+              <li>Participação ativa na comunidade.</li>
+            </ul>
+
+            <h4>Nossa Metodologia:</h4>
+            <p>
+              Utilizamos uma abordagem centrada no aluno adulto, valorizando
+              suas experiências de vida. Com aulas dinâmicas, materiais
+              adaptados e atividades práticas, o aprendizado se torna
+              significativo e prazeroso. Nosso ambiente é acolhedor e
+              respeitoso, garantindo que todos se sintam à vontade para
+              aprender.
+            </p>
+
+            <div class="story-section">
+              <h4>Histórias de Sucesso:</h4>
+              <div class="story-grid">
+                <div class="story-card">
+                  <p>
+                    "Depois de aprender a ler no Instituto, consegui tirar minha
+                    carteira de motorista! É uma liberdade que eu nunca imaginei
+                    ter." <br />
+                    João Silva, 55 anos.
+                  </p>
+                </div>
+                <div class="story-card">
+                  <p>
+                    "Agora consigo ajudar meus netos com a lição de casa. É uma
+                    alegria imensa ver o orgulho nos olhos deles." <br />
+                    Ana Paula, 62 anos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Curso: MasterGeeks - Programação para Jovens -->
+        <section id="mastergeeks-curso" class="course-card mastergeeks">
+          <div class="course-card-content">
+            <h3>
+              MasterGeeks: O Melhor Curso de Programação para Adolescentes e
+              Jovens do Brasil!
+            </h3>
+            <p>
+              MasterGeeks é o melhor curso de programação para adolescentes e
+              jovens do Brasil! Aqui, a nova geração aprende a criar o futuro,
+              desenvolvendo habilidades em tecnologia e inovação. Prepare-se
+              para se tornar um gênio da programação e transformar suas ideias
+              em realidade.
+            </p>
+
+            <div class="course-media-grid">
+              <div class="course-media-item">
+                <h4>Jovens programando em sala de aula</h4>
+                <img
+                  src="imagens/curso-programacao-1.jpg"
+                  alt="Jovens programando em sala de aula"
+                />
+                <p class="text-sm">
+                  Nossos jovens talentos desenvolvendo seus primeiros códigos.
+                </p>
+              </div>
+              <div class="course-media-item">
+                <h4>Depoimento de aluno do Curso</h4>
+                <img
+                  src="imagens/depoimento-aluno-programacao-1.png"
+                  alt="Depoimento de Aluno do Curso"
+                />
+                <audio controls class="w-full">
+                  <source
+                    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+                    type="audio/mpeg"
+                  />
+                  Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <p class="text-sm">
+                  Ouça o que o Pedro, aluno do MasterGeeks, tem a dizer.
+                </p>
+              </div>
+              <div class="course-media-item">
+                <h4>Vídeo: Projeto de Alunos MasterGeeks</h4>
+                <iframe
+                  class="youtube-embed"
+                  src="https://www.youtube.com/embed/r9buAwVBDhA?si=uh1KthEPnqvPvh1b"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+                <p><b>Criando um jogo SIMPLES usando JavaScript e HTML</b></p>
+                <p class="text-sm">
+                  Veja um jogo simples criado por nossos alunos!
+                </p>
+              </div>
+            </div>
+
+            <h4>O que você vai aprender:</h4>
+            <ul>
+              <li>Lógica de programação e pensamento computacional.</li>
+              <li>Desenvolvimento de jogos e aplicativos simples.</li>
+              <li>Introdução a linguagens como Python e JavaScript.</li>
+              <li>Resolução de problemas e criatividade.</li>
+              <li>Fundamentos de inteligência artificial (básico).</li>
+            </ul>
+
+            <h4>Nossa Metodologia:</h4>
+            <p>
+              Com uma abordagem prática e projetos divertidos, os jovens
+              aprendem a programar de forma intuitiva. Nossos instrutores são
+              especialistas e apaixonados por tecnologia, criando um ambiente de
+              aprendizado estimulante e desafiador. Acreditamos que a melhor
+              forma de aprender é fazendo!
+            </p>
+
+            <div class="story-section">
+              <h4>Histórias de Sucesso:</h4>
+              <div class="story-grid">
+                <div class="story-card">
+                  <p>
+                    "Sempre quis criar meus próprios jogos. Com o MasterGeeks,
+                    aprendi a lógica e já fiz meu primeiro joguinho!" - Lucas
+                    Pereira, 14 anos.
+                  </p>
+                </div>
+                <div class="story-card">
+                  <p>
+                    "O curso me abriu a mente para o mundo da tecnologia. Agora
+                    penso em seguir carreira na área de TI." - Sofia Mendes, 17
+                    anos.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Seção de Avaliação: Quiz de Alfabetização -->
+        <section id="quiz-eja" class="course-card quiz">
+          <div class="course-card-content">
+            <h3>
+              Quiz da Semana <br />
+              * Teste de Conhecimentos em Alfabetização! *
+            </h3>
+            <p>
+              Responda a este pequeno quiz para testar o que você aprendeu ou
+              para ter uma ideia do nosso método de avaliação. <br />
+              É divertido e rápido!
+            </p>
+
+            <div id="quiz-container">
+              <form id="ejaQuizForm">
+                <!-- Question 1 -->
+                <div class="mb-6">
+                  <p class="font-semibold">
+                    1. Qual palavra completa a frase: "A ____ é muito importante
+                    para a saúde."?
+                  </p>
+                  <label class="block">
+                    <input type="radio" name="q1" value="a" /> Água
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q1" value="b" /> Casa
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q1" value="c" /> Mesa
+                  </label>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="mb-6">
+                  <p class="font-semibold">
+                    2. Qual letra inicia a palavra "ESCOLA"?
+                  </p>
+                  <label class="block">
+                    <input type="radio" name="q2" value="a" /> O
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q2" value="b" /> E
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q2" value="c" /> A
+                  </label>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="mb-6">
+                  <p class="font-semibold">
+                    3. Qual destas palavras é um nome de fruta?
+                  </p>
+                  <label class="block">
+                    <input type="radio" name="q3" value="a" /> Carro
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q3" value="b" /> Banana
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q3" value="c" /> Livro
+                  </label>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="mb-6">
+                  <p class="font-semibold">
+                    4. Qual palavra completa a frase: "O ____ é um animal de
+                    estimação muito comum?"
+                  </p>
+                  <label class="block">
+                    <input type="radio" name="q4" value="a" /> Pão
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q4" value="b" /> Cachorro
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q4" value="c" /> Árvore
+                  </label>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="mb-6">
+                  <p class="font-semibold">
+                    5. Qual letra vem depois do "M" no alfabeto?"
+                  </p>
+                  <label class="block">
+                    <input type="radio" name="q5" value="a" /> L
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q5" value="b" /> N
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q5" value="c" /> O
+                  </label>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="mb-6">
+                  <p class="font-semibold">
+                    6. Qual destas palavras é um objeto que usamos para
+                    escrever?"
+                  </p>
+                  <label class="block">
+                    <input type="radio" name="q6" value="a" /> Bola
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q6" value="b" /> Lápis
+                  </label>
+                  <label class="block">
+                    <input type="radio" name="q6" value="c" /> Flor
+                  </label>
+                </div>
+
+                <button type="submit" class="btn-quiz">Ver Resultado</button>
+              </form>
+              <div id="quiz-results" class="mt-8"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Seção Inovadora: Banco de Palavras/Códigos Colaborativo -->
+        <section id="collab-board" class="course-card collab">
+          <div class="course-card-content">
+            <h3>Nosso Mural Colaborativo: Compartilhe e Aprenda!</h3>
+            <p>
+              Aqui, você pode compartilhar uma palavra nova que aprendeu, uma
+              frase inspiradora, ou até mesmo um pequeno trecho de código que
+              você criou! Vamos construir juntos nosso conhecimento.
+            </p>
+
+            <div id="collab-board-content">
+              <textarea
+                id="collab-input"
+                rows="4"
+                placeholder="Escreva sua palavra, frase ou código aqui..."
+              ></textarea>
+              <button id="submit-collab" class="btn-collab">
+                Compartilhar
+              </button>
+
+              <div id="collab-items">
+                <!-- Collab items will be added here by JavaScript -->
+                <div class="collab-item-card">
+                  <p>"A educação transforma."</p>
+                  <span>Compartilhado por: Aluno Exemplo</span>
+                </div>
+                <div class="collab-item-card">
+                  <p>"print('Olá, Mundo!')"</p>
+                  <span>Compartilhado por: Jovem Coder</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Campanha do Agasalho Section -->
+        <section id="campanha-agasalho" class="campaign-section">
+          <h2>Campanha do Agasalho</h2>
+          <p>
+            Aqueça corações neste inverno! Participe da Campanha do Agasalho do
+            Instituto Casa Verde. Sua doação de roupas e cobertores faz toda a
+            diferença para quem mais precisa na comunidade. Juntos, podemos
+            levar calor e esperança.
+          </p>
+          <a href="index.html#contato" class="btn-campaign">
+            Saiba Mais e Doe!
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Instituto Casa Verde. Todos os direitos reservados.</p>
+        <div class="social-links">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-whatsapp"></a>
+        </div>
+        <p class="mt-2">
+          Endereço: Rua Aramina, 83 - Jardim Fiorelo, Itaquaquecetuba - SP
+        </p>
+        <p>
+          Telefone: +55 (11) 91822-5870 | Email: casaverdeinstituto@gmail.com
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburgerMenu = document.querySelector(".hamburger-menu");
+        const mainNav = document.querySelector(".main-nav");
+        const navLinks = document.querySelectorAll(".main-nav ul li a");
+
+        // Toggle menu para mobile
+        if (hamburgerMenu && mainNav) {
+          hamburgerMenu.addEventListener("click", () => {
+            mainNav.classList.toggle("active");
+            hamburgerMenu.classList.toggle("active");
+          });
+        }
+
+        // Fechar menu ao clicar em um link (para o caso de links para âncoras na própria página)
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            if (mainNav.classList.contains("active")) {
+              mainNav.classList.remove("active");
+              hamburgerMenu.classList.remove("active");
+            }
+          });
+        });
+
+        // Animação de rolagem suave para as âncoras (se houver links #dentro da pagina)
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            // Verifica se o href aponta para um ID na própria página
+            if (
+              this.getAttribute("href").startsWith("#") &&
+              this.getAttribute("href").length > 1
+            ) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute("href")).scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // JavaScript for the Quiz functionality
+        document
+          .getElementById("ejaQuizForm")
+          .addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const answers = {
+              q1: "a", // Água
+              q2: "b", // E
+              q3: "b", // Banana
+              q4: "b", // Cachorro
+              q5: "b", // N
+              q6: "b", // Lápis
+            };
+
+            let score = 0;
+            const form = event.target;
+            const resultsDiv = document.getElementById("quiz-results");
+
+            // Get selected answers
+            const q1Answer = form.elements["q1"].value;
+            const q2Answer = form.elements["q2"].value;
+            const q3Answer = form.elements["q3"].value;
+            const q4Answer = form.elements["q4"].value;
+            const q5Answer = form.elements["q5"].value;
+            const q6Answer = form.elements["q6"].value;
+
+            // Check answers and calculate score
+            if (q1Answer === answers.q1) {
+              score++;
+            }
+            if (q2Answer === answers.q2) {
+              score++;
+            }
+            if (q3Answer === answers.q3) {
+              score++;
+            }
+            if (q4Answer === answers.q4) {
+              score++;
+            }
+            if (q5Answer === answers.q5) {
+              score++;
+            }
+            if (q6Answer === answers.q6) {
+              score++;
+            }
+
+            // Display results
+            resultsDiv.innerHTML = `Você acertou ${score} de ${
+              Object.keys(answers).length
+            } perguntas!`;
+            resultsDiv.classList.remove("quiz-incorrect", "quiz-correct"); // Clear previous classes
+            if (score === Object.keys(answers).length) {
+              resultsDiv.classList.add("quiz-correct");
+            } else {
+              resultsDiv.classList.add("quiz-incorrect");
+            }
+          });
+
+        // JavaScript for the Collaborative Board
+        document
+          .getElementById("submit-collab")
+          .addEventListener("click", function () {
+            const inputElement = document.getElementById("collab-input");
+            const itemsContainer = document.getElementById("collab-items");
+            const newItemText = inputElement.value.trim();
+
+            if (newItemText) {
+              const newItemDiv = document.createElement("div");
+              newItemDiv.classList.add("collab-item-card");
+              newItemDiv.innerHTML = `
+                        <p>"${newItemText}"</p>
+                        <span>Compartilhado por: Aluno do Instituto</span>
+                    `;
+              itemsContainer.prepend(newItemDiv); // Add to the beginning
+              inputElement.value = ""; // Clear the input field
+            } else {
+              // Consider a custom modal for user feedback instead of console.log
+              console.log("Por favor, escreva algo para compartilhar.");
+            }
+          });
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // ... seu código existente ...
+
+        // Carregar dados do JSON externo
+        fetch("URL_DO_SEU_JSON/cursos.json")
+          .then((response) => response.json())
+          .then((data) => {
+            renderizarCursos(data.cursos);
+            renderizarQuiz(data.quiz);
+            renderizarMural(data.muralColaborativo);
+            renderizarCampanha(data.campanha);
+          })
+          .catch((error) =>
+            console.error("Erro ao carregar dados dos cursos:", error)
+          );
+      });
+
+      function renderizarCursos(cursos) {
+        const container = document.querySelector(".container");
+
+        cursos.forEach((curso) => {
+          const section = document.createElement("section");
+          section.id = `${curso.id}-curso`;
+          section.className = `course-card ${curso.id}`;
+
+          section.innerHTML = `
+      <div class="course-card-content">
+        <h3>${curso.titulo}</h3>
+        <p>${curso.descricao}</p>
+        
+        <div class="course-media-grid">
+          ${curso.midias
+            .map((midia) => {
+              if (midia.tipo === "imagem") {
+                return `
+                <div class="course-media-item">
+                  <h4>${midia.titulo}</h4>
+                  <img src="${midia.src}" alt="${midia.titulo}">
+                  <p class="text-sm">${midia.descricao}</p>
+                </div>
+              `;
+              } else if (midia.tipo === "audio") {
+                return `
+                <div class="course-media-item">
+                  <h4>${midia.titulo}</h4>
+                  <img src="${midia.imagem}" alt="${midia.titulo}">
+                  <audio controls class="w-full">
+                    <source src="${midia.src}" type="audio/mpeg">
+                    Seu navegador não suporta o elemento de áudio.
+                  </audio>
+                  <p class="text-sm">${midia.descricao}</p>
+                </div>
+              `;
+              } else if (midia.tipo === "video") {
+                return `
+                <div class="course-media-item">
+                  <h4>${midia.titulo}</h4>
+                  <iframe class="youtube-embed" 
+                    src="${midia.src}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                  <p><b>${midia.legenda}</b></p>
+                  <p class="text-sm">${midia.descricao}</p>
+                </div>
+              `;
+              }
+            })
+            .join("")}
+        </div>
+        
+        <h4>O que você vai aprender:</h4>
+        <ul>
+          ${curso.oQueVaiAprender.map((item) => `<li>${item}</li>`).join("")}
+        </ul>
+        
+        <h4>Nossa Metodologia:</h4>
+        <p>${curso.metodologia}</p>
+        
+        <div class="story-section">
+          <h4>Histórias de Sucesso:</h4>
+          <div class="story-grid">
+            ${curso.historiasSucesso
+              .map(
+                (historia) => `
+              <div class="story-card">
+                <p>"${historia.texto}" <br> ${historia.autor}</p>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+    `;
+
+          container.appendChild(section);
+        });
+      }
+
+      function renderizarQuiz(quiz) {
+        const quizContainer = document.getElementById("quiz-container");
+        if (!quizContainer) return;
+
+        const form = document.createElement("form");
+        form.id = "ejaQuizForm";
+
+        quiz.perguntas.forEach((pergunta, index) => {
+          const perguntaDiv = document.createElement("div");
+          perguntaDiv.className = "mb-6";
+
+          perguntaDiv.innerHTML = `
+      <p class="font-semibold">${pergunta.pergunta}</p>
+      ${pergunta.opcoes
+        .map(
+          (opcao) => `
+        <label class="block">
+          <input type="radio" name="q${index + 1}" value="${opcao.valor}"> ${
+            opcao.texto
+          }
+        </label>
+      `
+        )
+        .join("")}
+    `;
+
+          form.appendChild(perguntaDiv);
+        });
+
+        const submitButton = document.createElement("button");
+        submitButton.type = "submit";
+        submitButton.className = "btn-quiz";
+        submitButton.textContent = "Ver Resultado";
+        form.appendChild(submitButton);
+
+        quizContainer.innerHTML = "";
+        quizContainer.appendChild(form);
+
+        // Adicionar o evento de submit (seu código existente para o quiz)
+        // ... (código para processar o quiz)
+      }
+
+      function renderizarMural(mural) {
+        const muralSection = document.getElementById("collab-board");
+        if (!muralSection) return;
+
+        muralSection.querySelector("h3").textContent = mural.titulo;
+        muralSection.querySelector("p").textContent = mural.descricao;
+
+        const itemsContainer = document.getElementById("collab-items");
+        itemsContainer.innerHTML = mural.itensIniciais
+          .map(
+            (item) => `
+    <div class="collab-item-card">
+      <p>"${item.texto}"</p>
+      <span>Compartilhado por: ${item.autor}</span>
+    </div>
+  `
+          )
+          .join("");
+      }
+
+      function renderizarCampanha(campanha) {
+        const campanhaSection = document.getElementById("campanha-agasalho");
+        if (!campanhaSection) return;
+
+        campanhaSection.innerHTML = `
+    <h2>${campanha.titulo}</h2>
+    <p>${campanha.descricao}</p>
+    <a href="${campanha.botao.link}" class="btn-campaign">
+      ${campanha.botao.texto}
+    </a>
+  `;
+      }
+    </script>
+  </body>
+</html>
